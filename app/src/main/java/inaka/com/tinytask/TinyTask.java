@@ -50,7 +50,6 @@ public class TinyTask<T> {
 
     public void cancel() {
         if(genericTask != null) {
-            something.ifCancelled();
             genericTask.cancel(true);
         }
     }
