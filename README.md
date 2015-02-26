@@ -31,7 +31,7 @@ dependencies {
 The API methods should be self-explanatory :)
 
 ```java
-task = TinyTask.perform(new Something<String>() {
+TinyTask.perform(new Something<String>() {
             @Override
             public String whichDoes() {
                 return doWork(); // you write this method..
@@ -47,12 +47,7 @@ task = TinyTask.perform(new Something<String>() {
             public void ifNotOK(Exception e) {
                 Log.i(TAG, e.toString());
             }
-        });
-
-        task.go();
-    }
-
-}
+        }).go();
 ```
 ### Contact Us
 For **questions** or **general comments** regarding the use of this library, please use our public
