@@ -1,6 +1,6 @@
 package inaka.com.tinytask;
 
-abstract class Something<T> {
+public abstract class Something<T> {
 
     abstract T whichDoes() throws Exception;
 
