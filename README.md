@@ -31,23 +31,10 @@ dependencies {
 The API methods should be self-explanatory :)
 
 ```java
-public class TestActivity extends Activity {
-
-    private static final String TAG = "TinyTask";
-    private TinyTask task;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        test();
-    }
-
-    public void test() {
-
-        task = TinyTask.perform(new Something<String>() {
+task = TinyTask.perform(new Something<String>() {
             @Override
             public String whichDoes() {
-                return pretendToDoSomething();
+                return doWork(); // you write this method..
             }
 
         }).whenDone(new DoThis<String>() {
@@ -63,27 +50,6 @@ public class TestActivity extends Activity {
         });
 
         task.go();
-    }
-
-    private String pretendToDoSomething() {
-        for (int i = 0; i < 20; i++) {
-            try {
-
-                if(!task.isCancelled()) {
-                    Log.i(TAG, "doing something..");
-                    Thread.sleep(500);
-                }
-
-            } catch (InterruptedException e) { }
-        }
-        return "done!";
-    }
-
-    public void onPause() {
-        super.onPause();
-
-        // you should cancel the task accordingly to avoid NPE in the callbacks
-        task.cancel();
     }
 
 }
