@@ -1,7 +1,5 @@
 package inaka.com.tinytask;
 
-import android.os.AsyncTask;
-
 public class GenericTask<T> extends AsyncTask<Void, Void, T> {
 
     private Something<T> something;

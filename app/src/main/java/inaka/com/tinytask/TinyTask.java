@@ -2,7 +2,6 @@ package inaka.com.tinytask;
 
 public class TinyTask<T> {
 
-    private static TinyTask instance = null;
     private GenericTask<T> genericTask;
     private Something<T> something;
     private DoThis<T> callback;
@@ -16,21 +15,12 @@ public class TinyTask<T> {
     }
 
     public static TinyTask perform(Something something) {
-        if(instance == null) {
-            instance = new TinyTask(something);
-        } else {
-            instance.something = something;
-        }
-        return instance;
+        return new TinyTask(something);
     }
 
     public TinyTask whenDone(DoThis<T> callback) {
-        if(instance == null) {
-            instance = new TinyTask<>(callback);
-        } else {
-            instance.callback = callback;
-        }
-        return instance;
+        this.callback = callback;
+        return this;
     }
 
     public Something<T> getSomething() {
@@ -42,20 +32,24 @@ public class TinyTask<T> {
     }
 
     public void go() {
-        if(genericTask == null) {
-            genericTask = new GenericTask<>(this);
-            genericTask.execute();
-        }
+        genericTask = new GenericTask<>(this);
+        genericTask.execute();
     }
 
     public void cancel() {
         if(genericTask != null) {
             genericTask.cancel(true);
         }
+        genericTask = null;
+        something = null;
+        callback = null;
     }
 
     public boolean isCancelled() {
-        return genericTask.isCancelled();
+        if(genericTask != null) {
+            genericTask.isCancelled();
+        }
+        return true;
     }
 }
 
