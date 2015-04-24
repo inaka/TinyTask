@@ -33,7 +33,7 @@ public class TinyTask<T> {
 
     public void go() {
         genericTask = new GenericTask<>(this);
-        genericTask.execute();
+        genericTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void cancel() {
