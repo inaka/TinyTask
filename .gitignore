@@ -1,9 +1,8 @@
 .gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
+local.properties
+.idea/workspace.xml
+.idea/libraries
 .DS_Store
 /build
-/android-crop/build/
-/lib/build
-/app/src/main/assets/crashlytics-build.properties
+/captures
+

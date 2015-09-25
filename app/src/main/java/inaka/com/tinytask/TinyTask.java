@@ -2,60 +2,60 @@ package inaka.com.tinytask;
 
 public class TinyTask<T> {
 
-    private static TinyTask instance = null;
-    private GenericTask<T> genericTask;
-    private Something<T> something;
-    private DoThis<T> callback;
+    private static TinyTask mInstance = null;
+    private GenericTask<T> mGenericTask;
+    private Something<T> mSomething;
+    private DoThis<T> mCallback;
 
     private TinyTask(Something<T> something) {
-        this.something = something;
+        this.mSomething = something;
     }
 
     private TinyTask(DoThis<T> callback) {
-        this.callback = callback;
+        this.mCallback = callback;
     }
 
     public static TinyTask perform(Something something) {
-        if(instance == null) {
-            instance = new TinyTask(something);
+        if (mInstance == null) {
+            mInstance = new TinyTask(something);
         } else {
-            instance.something = something;
+            mInstance.mSomething = something;
         }
-        return instance;
+        return mInstance;
     }
 
     public TinyTask whenDone(DoThis<T> callback) {
-        if(instance == null) {
-            instance = new TinyTask<>(callback);
+        if (mInstance == null) {
+            mInstance = new TinyTask<>(callback);
         } else {
-            instance.callback = callback;
+            mInstance.mCallback = callback;
         }
-        return instance;
+        return mInstance;
     }
 
     public Something<T> getSomething() {
-        return something;
+        return mSomething;
     }
 
     public DoThis<T> getCallback() {
-        return callback;
+        return mCallback;
     }
 
     public void go() {
-        if(genericTask == null) {
-            genericTask = new GenericTask<>(this);
-            genericTask.execute();
+        if (mGenericTask == null) {
+            mGenericTask = new GenericTask<>(this);
+            mGenericTask.execute();
         }
     }
 
     public void cancel() {
-        if(genericTask != null) {
-            genericTask.cancel(true);
+        if (mGenericTask != null) {
+            mGenericTask.cancel(true);
         }
     }
 
     public boolean isCancelled() {
-        return genericTask.isCancelled();
+        return mGenericTask.isCancelled();
     }
 }
 

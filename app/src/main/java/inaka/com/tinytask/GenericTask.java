@@ -17,7 +17,7 @@ public class GenericTask<T> extends AsyncTask<Void, Void, T> {
     protected T doInBackground(Void... params) {
         try {
             return something.whichDoes();
-        } catch(Exception e) {
+        } catch (Exception e) {
             exception = e;
             return null;
         }
@@ -26,8 +26,8 @@ public class GenericTask<T> extends AsyncTask<Void, Void, T> {
     @Override
     protected void onPostExecute(T result) {
 
-        if(!isCancelled()) {
-            if(exception != null) {
+        if (!isCancelled()) {
+            if (exception != null) {
                 callback.ifNotOK(exception);
             } else {
                 callback.ifOK(result);
