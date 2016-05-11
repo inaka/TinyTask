@@ -44,7 +44,11 @@ public class TinyTask<T> {
     public void go() {
         if(genericTask == null) {
             genericTask = new GenericTask<>(this);
-            genericTask.execute();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                genericTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            } else {
+                genericTask.execute();
+            }
         }
     }
 
